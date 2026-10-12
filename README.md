@@ -5,9 +5,11 @@ port of the Windows-only `ATTACK SHARK V6 SOFT` app — no Wine, no vendor
 driver, no root after a one-time setup. Talks HID directly to the 2.4G
 receiver over USB (and reads battery over Bluetooth).
 
-> **V6 only** — this tool works exclusively with the ATTACK SHARK V6
-> (2.4G receiver `1d57:fa60/fa65`, wired `1d57:2224`). It does not support
-> other ATTACK SHARK models.
+## **V6 ONLY**
+
+**This tool works exclusively with the ATTACK SHARK V6
+(2.4G receiver `1d57:fa60/fa65`, wired `1d57:2224`).
+It does not support other ATTACK SHARK models.**
 
 ![UI narrow](docs/ui2.png)
 
