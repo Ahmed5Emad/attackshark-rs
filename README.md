@@ -1,68 +1,90 @@
-# attackshark-rs — native Linux tool for ATTACK SHARK V6-family mice
+# attackshark-rs
 
-Rust port of ATTACK SHARK V6 SOFT (Windows). No Wine, no driver, talks HID
-directly. Built with REA-driven reverse engineering (see Protocol below).
+Native Linux tool for ATTACK SHARK V6-family gaming mice. A from-scratch Rust
+port of the Windows-only `ATTACK SHARK V6 SOFT` app — no Wine, no vendor
+driver, no root after a one-time setup. Talks HID directly to the 2.4G
+receiver over USB (and reads battery over Bluetooth).
 
-## Device
+![UI](https://github.com/Ahmed5Emad/attackshark-rs/blob/master/docs/ui.png)
 
-USB 1d57:fa60 / fa65 ("LXDDZ 2.4G Wireless Device"). Four HID interfaces:
+## What it does
 
-| node | iface | usage | role |
-|------|-------|-------|------|
-| hidraw0 | 0 | 0001/0006 | boot mouse |
-| hidraw2 | 1 | 0001/0002 | mouse + wheel + consumer |
-| hidraw3 | 2 | 0001/0080, 000c/0001, 000a/0000, 000b/0000 | CONFIG CHANNEL |
-| hidraw4 | 3 | 0001/0006 | keyboard modifiers |
+- **DPI stages** — 6 stages (default 800 / 1600 / 2400 / 3200 / 8000 / 25000),
+  each with its own LED color, active-stage select, angle snap + ripple toggles
+- **Polling rate** — 125 / 250 / 500 / 1000 Hz
+- **Lighting** — off / static / breathing / neon / color cycle, color + speed
+- **Power** — sleep timer, debounce, live battery meter from the heartbeat
+- **Buttons + macros** (experimental) — remap 8 buttons, send macro packets
+- **Factory reset** — one click restores vendor defaults
+- **Responsive single-page UI** — core cards up top, experimental section
+  below; narrow windows stack the cards instead of squeezing them
 
-Config channel report map (from 206-byte descriptor): vendor feature
-reports 04(55B) 05(14B) 06(8B) 07(7B) 08(58B) 09(63B) 0A/0B(7B) 0C(9B)
-10(7B) A0(7B) 22(63B), vendor input 03(4B).
+Every write is verified against the mouse's ACK on the interrupt pipe, and the
+footer reports exactly what the hardware said back.
 
-## Protocol (observed evidence, not guesses)
+## Supported hardware
 
-- Source: ATTACK SHARK V6 SOFT .exe = Inno Setup image (Guangzhou
-  Junxingcheng). Payload: AttackShark.exe 1.7MB + hidapi.dll +
-  hiddriver_1..18.dll + hiddriver_4k_1.dll. 17 of 18 hiddriver DLLs are
-  byte-identical (md5 07823eb5...) => one shared protocol for all standard
-  models incl. V6; 4K variant differs. DLL exports: Open/Close_FeatureDevice,
-  Open/Close_DevMonitor, GetFeature/SetFeature, Hid_Read/Hid_Write over
-  WriteFile/ReadFile. Command bytes are built in AttackShark.exe per model.
-- usbmon capture of the Windows app's sync loop (342 URBs, bus 3 dev 4):
-  GET_REPORT Feature 0xA0 on iface 0 -> `a0 00 00 00 00 00 00 00` (retried
-  ~every 5s, zeros = "no data", app waits forever under Wine = stuck sync
-  screen). Zero host->device transfers during sync: config goes over
-  interrupt OUT/IN (Hid_Write/Hid_Read), not control.
-- This tool reproduces the A0 read natively: `info` prints
-  `feature A0 (8B): a0 00 00 00 00 00 00 00` — same bytes as usbmon.
+| VID:PID | Device |
+|---------|--------|
+| `1d57:fa60` / `fa65` | 2.4G receiver ("LXDDZ 2.4G Wireless Device") |
+| `1d57:2224` | Wired V6 |
+
+Confirmed live on V6 hardware (USB + Bluetooth battery). The protocol family
+is shared across standard models (the vendor's 18 `hiddriver` DLLs are
+byte-identical) — see `PROTOCOL.md`.
+
+## Install
+
+One-time setup (asks for root **once**, ever — installs a udev rule so the
+receiver is readable by your user):
+
+```sh
+cargo build --release
+./install.sh
+# unplug the receiver, plug it back in
+```
+
+After that, never sudo again.
 
 ## Usage
 
-  cargo build
-  ./target/debug/attackshark-rs list          # find the mouse
-  ./target/debug/attackshark-rs info          # open config channel + read A0
-  ./target/debug/attackshark-rs watch [secs]  # stream input reports live
-  ./target/debug/attackshark-rs set-feature <id> <hex bytes...>
+```sh
+attackshark-ui            # the GUI (also: cargo run --bin ui)
+attackshark-rs list       # find the mouse
+attackshark-rs info       # open config channel + read feature A0
+attackshark-rs watch      # stream input reports live
+attackshark-rs set-feature <id> <hex bytes...>
+```
 
-Needs hidraw access: install ../attackshark-linux/99-attackshark.rules, then
-re-plug the receiver (or chmod 666 /dev/hidraw* until next replug/reboot).
+## Protocol
 
-## Status 2026-10-12: confirmed live on V6 hardware
+Reverse-engineered from the vendor binary with USB captures — every claim is
+backed by observed bytes, not guesses. Full documentation in [`PROTOCOL.md`](PROTOCOL.md):
 
-- Transport: SET_REPORT feature on iface 2 (hidapi send_feature_report).
-- V6 ACK form: `03 24 50 00 <report-id>` on the interrupt pipe.
-- `set-polling 1000` -> ACK `03 24 50 00 06`. Reversible (125/250/500/1000).
-- `set-dpi` (X6-linear 56B layout, stages 800/1600/2400/3200/8000/25000,
-  active=2) -> ACK `03 24 50 00 04`. Feel-validated live: stage2=100 crawls,
-  stage2=25000 flies, restored to 1600. V6 heartbeat is `03 24 41 01 23`
-  (not X6's 03 10 form); battery decode still open.
-- V6 driver DLL is sha256-identical to X3/X6's hiddriver_1.dll.
+- Config channel: SET_REPORT feature on interface 2, ACK form `03 24 50 00 <id>`
+- DPI blob (`04`, 56B) · prefs (`05`) · lighting (`06`) · polling (`06`) ·
+  commit-first `0C` prefix every batch needs
+- Battery rides the 2.4G heartbeat `03 24 41 01 <pct>`
 
-## What's left
+`tools/` holds the raw capture logs and the Wine-era shims (historical
+interest only — nothing in the build needs them).
 
-- Feel-test: move the mouse (should feel unchanged at 1600 active), then
-  try a DPI button press on the mouse and run `watch` to learn the stage
-  event form.
-- Lighting / button remap / sleep / debounce reports: same transport,
-  layouts from the X11 driver's builders (LightingBuilder etc.) —
-  each needs one live ACK test like above.
-- Battery: find which report carries it on V6 (X6's 03 10 40 form absent).
+## Layout
+
+```
+src/
+  lib.rs        open_usb(), bt_battery_pct(), send_commit()
+  protocol.rs   packet builders, LightMode, buttons, macros, checksums
+  bt.rs         Bluetooth battery via BlueZ/D-Bus
+  main.rs       CLI: list / info / watch / set-feature
+  bin/ui.rs     egui GUI — craft-launcher-styled bento, one page
+examples/       per-feature probes (usb_set_stage, usb_sweep_light, ...)
+install.sh      one-time udev rule + binary install
+99-attackshark.rules
+```
+
+## Status
+
+Working: DPI, polling, lighting, power, battery, reset. Experimental
+(needs live verification): button remap, macros. Tested on Arch Linux
+(Omarchy) against V6 hardware, 2026-10-12.
