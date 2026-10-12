@@ -5,6 +5,8 @@ port of the Windows-only `ATTACK SHARK V6 SOFT` app — no Wine, no vendor
 driver, no root after a one-time setup. Talks HID directly to the 2.4G
 receiver over USB (and reads battery over Bluetooth).
 
+![UI](docs/ui.png)
+
 ## What it does
 
 - **DPI stages** — 6 stages (default 800 / 1600 / 2400 / 3200 / 8000 / 25000),
