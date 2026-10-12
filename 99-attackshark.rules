@@ -1,7 +1,8 @@
-# ATTACK SHARK V6 receiver (USB 2.4G dongle, Xenta 1d57:fa60/fa65)
+# ATTACK SHARK V6 receiver (USB 2.4G dongle, Xenta 1d57:fa60/fa65; wired V6 2224)
 # Gives the currently logged-in user read/write access automatically
 # (uaccess = systemd seat tag, no world-writable nodes, no input-group needed).
 SUBSYSTEM=="hidraw", ATTRS{idVendor}=="1d57", ATTRS{idProduct}=="fa60", TAG+="uaccess", MODE="0666"
 SUBSYSTEM=="hidraw", ATTRS{idVendor}=="1d57", ATTRS{idProduct}=="fa65", TAG+="uaccess", MODE="0666"
+SUBSYSTEM=="hidraw", ATTRS{idVendor}=="1d57", ATTRS{idProduct}=="2224", TAG+="uaccess", MODE="0666"
 # Bluetooth HID node (modalias match, survives hidraw renumbering)
 SUBSYSTEM=="hidraw", ATTRS{modalias}=="hid:b0005g0001v0000045Ep00000224", TAG+="uaccess", MODE="0666"
