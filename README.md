@@ -6,6 +6,7 @@ driver, no root after a one-time setup. Talks HID directly to the 2.4G
 receiver over USB (and reads battery over Bluetooth).
 
 ![UI](docs/ui.png)
+![UI narrow](docs/ui2.png)
 
 ## What it does
 
