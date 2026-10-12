@@ -1,0 +1,103 @@
+=== shim attached tick=6063765 tag=hiddriver_1 real=C:\Program Files (x86)\Attack Shark Software\hiddriver_1_real.dll h=72CB0000 ===
+6063765 hiddriver_1.dll Set_VIDPID(1d57:2055) rc=1
+6063765 hiddriver_1.dll Open_DevMonitor(000a0450 00000603 00000604) rc=1
+6063765 hiddriver_1.dll Open_FeatureDevice() rc=0
+=== shim attached tick=6063859 tag=hiddriver_2 real=C:\Program Files (x86)\Attack Shark Software\hiddriver_2_real.dll h=72C40000 ===
+6063859 hiddriver_2.dll Set_VIDPID(1d57:201b) rc=1
+6063859 hiddriver_2.dll Open_DevMonitor(000a0450 00000613 00000614) rc=1
+6063859 hiddriver_2.dll Open_FeatureDevice() rc=0
+=== shim attached tick=6063937 tag=hiddriver_5 real=C:\Program Files (x86)\Attack Shark Software\hiddriver_5_real.dll h=72BC0000 ===
+6063937 hiddriver_5.dll Set_VIDPID(1d57:201c) rc=1
+6063937 hiddriver_5.dll Open_DevMonitor(000a0450 00000643 00000644) rc=1
+6063937 hiddriver_5.dll Open_FeatureDevice() rc=0
+=== shim attached tick=6063984 tag=hiddriver_7 real=C:\Program Files (x86)\Attack Shark Software\hiddriver_7_real.dll h=72B60000 ===
+6063984 hiddriver_7.dll Set_VIDPID(1d57:211d) rc=1
+6063984 hiddriver_7.dll Open_DevMonitor(000a0450 00000673 00000674) rc=1
+6063984 hiddriver_7.dll Open_FeatureDevice() rc=0
+=== shim attached tick=6064015 tag=hiddriver_9 real=C:\Program Files (x86)\Attack Shark Software\hiddriver_9_real.dll h=72AC0000 ===
+6064015 hiddriver_9.dll Set_VIDPID(1d57:2121) rc=1
+6064015 hiddriver_9.dll Open_DevMonitor(000a0450 00000693 00000694) rc=1
+6064015 hiddriver_9.dll Open_FeatureDevice() rc=0
+=== shim attached tick=6064234 tag=hiddriver_3 real=C:\Program Files (x86)\Attack Shark Software\hiddriver_3_real.dll h=72980000 ===
+6064234 hiddriver_3.dll Set_VIDPID(1d57:fa61) rc=1
+6064234 hiddriver_3.dll Open_DevMonitor(000a0450 00000623 00000624) rc=1
+6064234 hiddriver_3.dll Open_FeatureDevice() rc=0
+=== shim attached tick=6064250 tag=hiddriver_4 real=C:\Program Files (x86)\Attack Shark Software\hiddriver_4_real.dll h=72960000 ===
+6064250 hiddriver_4.dll Set_VIDPID(1d57:fa55) rc=1
+6064250 hiddriver_4.dll Open_DevMonitor(000a0450 00000633 00000634) rc=1
+6064250 hiddriver_4.dll Open_FeatureDevice() rc=0
+=== shim attached tick=6064250 tag=hiddriver_6 real=C:\Program Files (x86)\Attack Shark Software\hiddriver_6_real.dll h=72940000 ===
+6064250 hiddriver_6.dll Set_VIDPID(1d57:2111) rc=1
+6064250 hiddriver_6.dll Open_DevMonitor(000a0450 00000663 00000664) rc=1
+6064250 hiddriver_6.dll Open_FeatureDevice() rc=0
+=== shim attached tick=6064265 tag=hiddriver_10 real=C:\Program Files (x86)\Attack Shark Software\hiddriver_10_real.dll h=72920000 ===
+6064265 hiddriver_10.dll Set_VIDPID(1d57:2125) rc=1
+6064265 hiddriver_10.dll Open_DevMonitor(000a0450 000006a3 000006a4) rc=1
+6064265 hiddriver_10.dll Open_FeatureDevice() rc=0
+=== shim attached tick=6064265 tag=hiddriver_11 real=C:\Program Files (x86)\Attack Shark Software\hiddriver_11_real.dll h=72900000 ===
+6064265 hiddriver_11.dll Set_VIDPID(1d57:2120) rc=1
+6064281 hiddriver_11.dll Open_DevMonitor(000a0450 000006b3 000006b4) rc=1
+6064281 hiddriver_11.dll Open_FeatureDevice() rc=0
+=== shim attached tick=6064281 tag=hiddriver_12 real=C:\Program Files (x86)\Attack Shark Software\hiddriver_12_real.dll h=728E0000 ===
+6064281 hiddriver_12.dll Set_VIDPID(1d57:2124) rc=1
+6064281 hiddriver_12.dll Open_DevMonitor(000a0450 000006c3 000006c4) rc=1
+6064281 hiddriver_12.dll Open_FeatureDevice() rc=0
+=== shim attached tick=6064281 tag=hiddriver_13 real=C:\Program Files (x86)\Attack Shark Software\hiddriver_13_real.dll h=728C0000 ===
+6064281 hiddriver_13.dll Set_VIDPID(1d57:2126) rc=1
+6064296 hiddriver_13.dll Open_DevMonitor(000a0450 000006d3 000006d4) rc=1
+6064296 hiddriver_13.dll Open_FeatureDevice() rc=0
+=== shim attached tick=6064296 tag=hiddriver_14 real=C:\Program Files (x86)\Attack Shark Software\hiddriver_14_real.dll h=728A0000 ===
+6064296 hiddriver_14.dll Set_VIDPID(1d57:2122) rc=1
+6064296 hiddriver_14.dll Open_DevMonitor(000a0450 000006e3 000006e4) rc=1
+6064296 hiddriver_14.dll Open_FeatureDevice() rc=0
+=== shim attached tick=6064296 tag=hiddriver_15 real=C:\Program Files (x86)\Attack Shark Software\hiddriver_15_real.dll h=72880000 ===
+6064296 hiddriver_15.dll Set_VIDPID(1d57:212c) rc=1
+6064312 hiddriver_15.dll Open_DevMonitor(000a0450 000006f3 000006f4) rc=1
+6064312 hiddriver_15.dll Open_FeatureDevice() rc=0
+=== shim attached tick=6064312 tag=hiddriver_16 real=C:\Program Files (x86)\Attack Shark Software\hiddriver_16_real.dll h=72860000 ===
+6064312 hiddriver_16.dll Set_VIDPID(1d57:2155) rc=1
+6064312 hiddriver_16.dll Open_DevMonitor(000a0450 00000703 00000704) rc=1
+6064312 hiddriver_16.dll Open_FeatureDevice() rc=0
+=== shim attached tick=6064328 tag=hiddriver_17 real=C:\Program Files (x86)\Attack Shark Software\hiddriver_17_real.dll h=72840000 ===
+6064328 hiddriver_17.dll Set_VIDPID(1d57:2224) rc=1
+6064328 hiddriver_17.dll Open_DevMonitor(000a0450 00000713 00000714) rc=1
+6064328 hiddriver_17.dll Open_FeatureDevice() rc=1
+=== shim attached tick=6064343 tag=hiddriver_18 real=C:\Program Files (x86)\Attack Shark Software\hiddriver_18_real.dll h=72820000 ===
+6064343 hiddriver_18.dll Set_VIDPID(1d57:215a) rc=1
+6064343 hiddriver_18.dll Open_DevMonitor(000a0450 00000723 00000724) rc=1
+6064343 hiddriver_18.dll Open_FeatureDevice() rc=0
+6064500 hiddriver_17.dll SetFeature len=8 rc=0 a0 0c 0a 00 00 00 00 00 
+6064703 hiddriver_17.dll SetFeature len=8 rc=1 a0 0c 0a 00 00 00 00 00 
+6065031 hiddriver_17.dll GetFeature len=8 rc=1 a0 01 00 00 00 00 00 00 
+6065140 hiddriver_17.dll GetFeature len=10 rc=1 0c 0a 01 fe 05 fa 00 00 00 00 
+6065250 hiddriver_17.dll SetFeature len=8 rc=1 a0 0b 08 00 00 00 00 00 
+6065562 hiddriver_17.dll GetFeature len=8 rc=1 a0 01 00 00 00 00 00 00 
+6065671 hiddriver_17.dll GetFeature len=8 rc=1 0b 08 01 06 00 00 00 00 
+6065781 hiddriver_17.dll SetFeature len=8 rc=1 a0 0a 80 00 01 00 00 00 
+6066109 hiddriver_17.dll GetFeature len=8 rc=1 a0 01 00 00 00 00 00 00 
+6066218 hiddriver_17.dll GetFeature len=128 rc=1 0a 80 01 01 fe 00 01 3f 00 00 0f 1f 2f 3f 9f f3 00 00 00 00 00 00 00 01 00 00 02 ff 00 00 00 ff 00 00 00 ff ff ff 00 00 ff ff ff 00 ff 00 00 00 00 00 00 01 00 69 0b 00 03 a8 00 ff 00 01 04 af 01 02 00 00 03 00 00 04 00 00 05 00 00 06 00 00 0d 00 00 3c 00 00 01 00 00 01 00 00 01 00 00 01 ...
+6083796 hiddriver_17.dll SetFeature len=10 rc=1 0c 0a 01 fe 01 fe 00 00 00 00 
+6084000 hiddriver_17.dll SetFeature len=56 rc=1 04 38 01 00 01 3f 00 20 12 25 38 4b bc c7 00 00 00 00 00 00 00 00 00 00 02 ff 00 00 00 ff 00 00 00 ff ff ff 00 00 ff ff ff 00 ff ff 40 00 ff ff ff 02 0f d4 00 00 00 00 
+6084218 hiddriver_17.dll SetFeature len=15 rc=1 05 0f 01 00 03 a8 00 ff 00 01 04 01 af 00 00 
+6084421 hiddriver_17.dll SetFeature len=9 rc=1 06 09 01 01 fe 00 00 00 00 
+6084625 hiddriver_17.dll SetFeature len=59 rc=1 08 3b 01 02 00 00 03 00 00 04 00 00 05 00 00 06 00 00 0d 00 00 3c 00 00 01 00 00 01 00 00 01 00 00 01 00 00 01 00 00 01 00 00 01 00 00 01 00 00 01 00 00 0a 00 00 09 00 00 00 79 
+6089312 hiddriver_17.dll SetFeature len=56 rc=1 04 38 01 00 01 3f 00 20 12 25 38 4b bc c7 00 00 00 00 00 00 00 00 00 00 01 ff 00 00 00 ff 00 00 00 ff ff ff 00 00 ff ff ff 00 ff ff 40 00 ff ff ff 02 0f d3 00 00 00 00 
+6091906 hiddriver_17.dll SetFeature len=56 rc=1 04 38 01 00 01 3f 00 20 12 25 38 4b bc c7 00 00 00 00 00 00 00 00 00 00 02 ff 00 00 00 ff 00 00 00 ff ff ff 00 00 ff ff ff 00 ff ff 40 00 ff ff ff 02 0f d4 00 00 00 00 
+6094125 hiddriver_17.dll SetFeature len=56 rc=1 04 38 01 00 01 3f 00 20 12 25 38 4b bc c7 00 00 00 00 00 00 00 00 00 00 03 ff 00 00 00 ff 00 00 00 ff ff ff 00 00 ff ff ff 00 ff ff 40 00 ff ff ff 02 0f d5 00 00 00 00 
+6096453 hiddriver_17.dll SetFeature len=56 rc=1 04 38 01 00 01 3f 00 20 12 25 38 4b bc c7 00 00 00 00 00 00 00 00 00 00 04 ff 00 00 00 ff 00 00 00 ff ff ff 00 00 ff ff ff 00 ff ff 40 00 ff ff ff 02 0f d6 00 00 00 00 
+6098500 hiddriver_17.dll SetFeature len=56 rc=1 04 38 01 00 01 3f 00 20 12 25 38 4b bc c7 00 00 00 00 00 00 00 00 00 00 05 ff 00 00 00 ff 00 00 00 ff ff ff 00 00 ff ff ff 00 ff ff 40 00 ff ff ff 02 0f d7 00 00 00 00 
+6101140 hiddriver_17.dll SetFeature len=56 rc=1 04 38 01 00 01 3f 00 20 12 25 38 4b bc c7 00 00 00 00 00 00 00 00 00 00 06 ff 00 00 00 ff 00 00 00 ff ff ff 00 00 ff ff ff 00 ff ff 40 00 ff ff ff 02 0f d8 00 00 00 00 
+6104625 hiddriver_17.dll SetFeature len=56 rc=1 04 38 01 00 01 3f 00 20 12 25 38 4b bc c7 00 00 00 00 00 00 00 00 00 00 01 ff 00 00 00 ff 00 00 00 ff ff ff 00 00 ff ff ff 00 ff ff 40 00 ff ff ff 02 0f d3 00 00 00 00 
+6110062 hiddriver_17.dll SetFeature len=56 rc=1 04 38 01 00 01 3f 00 20 b3 25 38 4b bc c7 00 00 00 00 00 00 00 00 00 00 01 ff 00 00 00 ff 00 00 00 ff ff ff 00 00 ff ff ff 00 ff ff 40 00 ff ff ff 02 10 74 00 00 00 00 
+6114984 hiddriver_17.dll SetFeature len=9 rc=1 06 09 01 02 fd 00 00 00 00 
+6116171 hiddriver_17.dll SetFeature len=9 rc=1 06 09 01 04 fb 00 00 00 00 
+6117281 hiddriver_17.dll SetFeature len=9 rc=1 06 09 01 08 f7 00 00 00 00 
+6126031 hiddriver_17.dll SetFeature len=15 rc=1 05 0f 01 00 03 a8 00 ff 00 0e 04 01 bc 00 00 
+6128234 hiddriver_17.dll SetFeature len=15 rc=1 05 0f 01 00 03 a8 00 ff 00 0e 0b 01 c3 00 00 
+6130687 hiddriver_17.dll SetFeature len=56 rc=1 04 38 01 00 00 3f 00 20 b3 25 38 4b bc c7 00 00 00 00 00 00 00 00 00 00 01 ff 00 00 00 ff 00 00 00 ff ff ff 00 00 ff ff ff 00 ff ff 40 00 ff ff ff 02 10 73 00 00 00 00 
+6132687 hiddriver_17.dll SetFeature len=56 rc=1 04 38 01 01 00 3f 00 20 b3 25 38 4b bc c7 00 00 00 00 00 00 00 00 00 00 01 ff 00 00 00 ff 00 00 00 ff ff ff 00 00 ff ff ff 00 ff ff 40 00 ff ff ff 02 10 74 00 00 00 00 
+6136062 hiddriver_17.dll SetFeature len=10 rc=1 0c 0a 01 fe 01 fe 00 00 00 00 
+6136281 hiddriver_17.dll SetFeature len=56 rc=1 04 38 01 00 01 3f 00 20 12 25 38 4b bc c7 00 00 00 00 00 00 00 00 00 00 02 ff 00 00 00 ff 00 00 00 ff ff ff 00 00 ff ff ff 00 ff ff 40 00 ff ff ff 02 0f d4 00 00 00 00 
+6136484 hiddriver_17.dll SetFeature len=15 rc=1 05 0f 01 00 03 a8 00 ff 00 01 04 01 af 00 00 
+6136687 hiddriver_17.dll SetFeature len=9 rc=1 06 09 01 01 fe 00 00 00 00 
+6136890 hiddriver_17.dll SetFeature len=59 rc=1 08 3b 01 02 00 00 03 00 00 04 00 00 05 00 00 06 00 00 0d 00 00 3c 00 00 01 00 00 01 00 00 01 00 00 01 00 00 01 00 00 01 00 00 01 00 00 01 00 00 01 00 00 0a 00 00 09 00 00 00 79 

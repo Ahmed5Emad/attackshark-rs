@@ -1,0 +1,10 @@
+[package]
+name = "attackshark-rs"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+eframe = "0.36.2"
+egui = "0.36.2"
+hidapi = "2"
+zbus = { version = "5.19.0", features = ["blocking-api"] }

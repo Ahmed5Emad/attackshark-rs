@@ -1,0 +1,11 @@
+LIBRARY hiddriver
+EXPORTS
+    Set_VIDPID=Set_VIDPID@8
+    Open_DevMonitor=Open_DevMonitor@12
+    Close_DevMonitor=Close_DevMonitor@0
+    Open_FeatureDevice=Open_FeatureDevice@0
+    Close_FeatureDevice=Close_FeatureDevice@0
+    SetFeature=SetFeature@8
+    GetFeature=GetFeature@8
+    Hid_Read=_Hid_Read
+    Hid_Write=_Hid_Write
