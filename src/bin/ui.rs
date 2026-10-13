@@ -86,7 +86,7 @@ const HUD_SPACING: f32 = HUD_SIZE * 0.15;
 const BUTTON_SPACING: f32 = HUD_SIZE * 0.12;
 /// Craft header / footer heights.
 const HEADER_H: f32 = 48.0;
-const FOOTER_H: f32 = 34.0;
+const FOOTER_H: f32 = 52.0;
 
 /// Inter 500.
 fn medium() -> FontFamily {
@@ -419,6 +419,72 @@ fn sbutton(ui: &mut Ui, text: &str, primary: bool, t: &Tokens) -> egui::Response
     if enabled { resp.on_hover_cursor(egui::CursorIcon::PointingHand) } else { resp }
 }
 
+/// Square dropdown in the site language: hairline box, selected value in
+/// mono caps, caret drawn by hand; the popup is a stack of navlink rows
+/// that invert on hover. Returns the picked index, if any.
+fn dropdown(
+    ui: &mut Ui,
+    id: impl std::hash::Hash + std::fmt::Debug,
+    selected: &str,
+    options: &[String],
+    t: &Tokens,
+) -> Option<usize> {
+    let w = ui.available_width();
+    let (rect, resp) = ui.allocate_exact_size(Vec2::new(w, CONTROL_H), egui::Sense::click());
+    let hovered = resp.hovered();
+    let p = ui.painter();
+    p.rect(
+        rect,
+        CornerRadius::ZERO,
+        if hovered { t.sunken } else { t.bg },
+        t.hairline(),
+        egui::StrokeKind::Inside,
+    );
+    let g = hud_galley(ui, selected, if hovered { t.strong } else { t.ink });
+    paint_left(
+        ui,
+        egui::Rect::from_min_size(
+            egui::pos2(rect.left() + 12.0, rect.top()),
+            Vec2::new(rect.width() - 36.0, rect.height()),
+        ),
+        g,
+        if hovered { t.strong } else { t.ink },
+    );
+    let cx = rect.right() - 18.0;
+    let cy = rect.center().y;
+    p.add(egui::Shape::convex_polygon(
+        vec![
+            egui::pos2(cx - 5.0, cy - 3.0),
+            egui::pos2(cx + 5.0, cy - 3.0),
+            egui::pos2(cx, cy + 3.0),
+        ],
+        t.muted,
+        Stroke::NONE,
+    ));
+    let mut out = None;
+    egui::Popup::menu(&resp).id(egui::Id::new(id)).show(|ui| {
+        ui.set_min_width(rect.width());
+        // Long lists scroll inside the popup instead of blowing up the page.
+        let rows = |ui: &mut Ui, out: &mut Option<usize>| {
+            for (i, opt) in options.iter().enumerate() {
+                if navlink(ui, "", opt, opt == selected, t).clicked() {
+                    *out = Some(i);
+                    ui.close();
+                }
+            }
+        };
+        if options.len() > 7 {
+            egui::ScrollArea::vertical().max_height(7.0 * 34.0).show(ui, |ui| {
+                rows(ui, &mut out);
+            });
+        } else {
+            rows(ui, &mut out);
+        }
+    });
+    resp.on_hover_cursor(egui::CursorIcon::PointingHand);
+    out
+}
+
 // ----------------------------------------------------------------- state ---
 
 // One page: core row (device / power / dpi) plus the experimental row below.
@@ -651,31 +717,26 @@ impl eframe::App for SharkApp {
                 });
             });
 
-        // toolbar: reset + reconnect right.
-        egui::Panel::top("toolbar")
-            .frame(egui::Frame::new().fill(t.bg).inner_margin(egui::Margin::symmetric(20, 12)))
-            .show(ui, |ui| {
-                ui.horizontal(|ui| {
-                    ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
-                        if sbutton(ui, "reset", true, &t).clicked() {
-                            self.do_reset();
-                        }
-                        if sbutton(ui, "reconnect", false, &t).clicked() {
-                            self.reconnect();
-                        }
-                    });
-                });
-            });
-
-        // footer: 34px bar — status left, heartbeat + error right.
+        // footer: bar — status left, reset + reconnect + heartbeat + error
+        // right, everything on the vertical centre.
         egui::Panel::bottom("footer")
             .frame(egui::Frame::new().fill(t.bg).inner_margin(egui::Margin::symmetric(20, 0)))
             .exact_size(FOOTER_H)
             .show(ui, |ui| {
-                ui.horizontal(|ui| {
+                let h = ui.available_height();
+                ui.horizontal_centered(|ui| {
+                    ui.set_min_height(h);
                     ui.spacing_mut().item_spacing.x = 0.0;
                     hud(ui, &self.status, t.muted);
                     ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
+                        if sbutton(ui, "reset", true, &t).clicked() {
+                            self.do_reset();
+                        }
+                        ui.add_space(8.0);
+                        if sbutton(ui, "reconnect", false, &t).clicked() {
+                            self.reconnect();
+                        }
+                        ui.add_space(12.0);
                         if !self.err.is_empty() {
                             hud(ui, &self.err, t.bad);
                             ui.add_space(12.0);
@@ -1030,11 +1091,13 @@ impl SharkApp {
                 let (name, _) = Self::BTN_NAMES[i];
                 ui.horizontal(|ui| {
                     hud(ui, name, t.muted);
-                    egui::ComboBox::from_id_salt(i).selected_text(Self::action_name(self.btn_actions[i].1)).show_ui(ui, |ui| {
-                        for (label, act) in Self::ACTIONS {
-                            ui.selectable_value(&mut self.btn_actions[i].1, act, label);
-                        }
-                    });
+                    let options: Vec<String> =
+                        Self::ACTIONS.iter().map(|(label, _)| label.to_string()).collect();
+                    if let Some(pick) =
+                        dropdown(ui, format!("btn{i}"), Self::action_name(self.btn_actions[i].1), &options, t)
+                    {
+                        self.btn_actions[i].1 = Self::ACTIONS[pick].1;
+                    }
                 });
             }
         });
@@ -1060,13 +1123,23 @@ impl SharkApp {
             ui.add_space(4.0);
             ui.horizontal(|ui| {
                 hud(ui, "button", t.muted);
-                egui::ComboBox::from_id_salt("mbtn")
-                    .selected_text(format!("extra{}", self.macro_btn))
-                    .show_ui(ui, |ui| {
-                        for b in [protocol::macros::BTN_LEFT, protocol::macros::BTN_RIGHT, protocol::macros::BTN_MIDDLE, protocol::macros::BTN_EXTRA4, protocol::macros::BTN_EXTRA5] {
-                            ui.selectable_value(&mut self.macro_btn, b, format!("id {b}"));
-                        }
-                    });
+                let mbtns = [
+                    ("left", protocol::macros::BTN_LEFT),
+                    ("right", protocol::macros::BTN_RIGHT),
+                    ("middle", protocol::macros::BTN_MIDDLE),
+                    ("extra4", protocol::macros::BTN_EXTRA4),
+                    ("extra5", protocol::macros::BTN_EXTRA5),
+                ];
+                let options: Vec<String> =
+                    mbtns.iter().map(|(label, b)| format!("{label} (id {b})")).collect();
+                let sel = mbtns
+                    .iter()
+                    .find(|(_, b)| *b == self.macro_btn)
+                    .map(|(label, _)| label.to_string())
+                    .unwrap_or_else(|| format!("id {}", self.macro_btn));
+                if let Some(pick) = dropdown(ui, "mbtn", &sel, &options, t) {
+                    self.macro_btn = mbtns[pick].1;
+                }
                 hud(ui, "repeat", t.muted);
                 ui.add(egui::DragValue::new(&mut self.macro_times).range(1..=255));
             });
